@@ -1,0 +1,227 @@
+/* ─── Case study page ────────────────────────────────────────────── */
+
+.cs { padding-top: 14vh; }
+
+/* Header */
+.cs-hero {
+  padding-bottom: 12vh;
+  border-bottom: 1px solid #1a1a18;
+  margin-bottom: 12vh;
+}
+.cs-back {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--grey);
+  margin-bottom: 48px;
+  letter-spacing: 0.02em;
+}
+.cs-back:hover { color: var(--white); }
+
+.cs-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--grey);
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+}
+.cs-title {
+  font-size: clamp(52px, 9vw, 140px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.cs-tagline {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(18px, 2vw, 26px);
+  color: var(--grey);
+  margin-top: 20px;
+  margin-bottom: 64px;
+}
+
+.cs-spec {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.cs-spec__item span {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--grey-dim);
+  margin-bottom: 10px;
+}
+.cs-spec__item p {
+  font-size: clamp(15px, 1.1vw, 18px);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .cs-spec { grid-template-columns: 1fr 1fr; row-gap: 28px; }
+}
+
+/* Sections */
+.cs-section { padding-bottom: 16vh; }
+.cs-index {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--grey);
+  margin-bottom: 24px;
+  letter-spacing: 0.04em;
+}
+.cs-lede {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(24px, 3.4vw, 42px);
+  line-height: 1.35;
+  max-width: 900px;
+  margin-bottom: 40px;
+}
+.cs-heading {
+  font-size: clamp(26px, 3vw, 40px);
+  font-weight: 400;
+  max-width: 760px;
+  margin-bottom: 24px;
+}
+.cs-text {
+  font-size: clamp(16px, 1.1vw, 19px);
+  line-height: 1.75;
+  color: var(--grey);
+  max-width: 640px;
+  margin-bottom: 56px;
+}
+
+.cs-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.cs-keywords span {
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 10px 18px;
+  border: 1px solid var(--grey-dim);
+  border-radius: 999px;
+  color: var(--grey);
+}
+
+/* Logo lockups */
+.cs-logo-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+.cs-logo-card {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cs-logo-card--navy { background: #0a3a5d; }
+.cs-logo-card--black { background: #000; border: 1px solid #1a1a18; }
+.cs-logo-card--white { background: #efefec; }
+.cs-logo-card img { width: 82%; height: 82%; object-fit: contain; }
+
+@media (max-width: 768px) {
+  .cs-logo-row { grid-template-columns: 1fr; }
+}
+
+/* Palette */
+.cs-palette {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.cs-swatch {
+  aspect-ratio: 3/2;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.cs-swatch span {
+  font-family: var(--display);
+  font-size: 18px;
+}
+.cs-swatch em {
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 11px;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+  .cs-palette { grid-template-columns: 1fr 1fr; }
+}
+
+/* Gallery (label design) */
+.cs-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 16px;
+}
+.cs-gallery__item {
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0d0d0b;
+}
+.cs-gallery__item--tall { grid-row: span 2; }
+.cs-gallery__item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+.cs-gallery__item:hover img { transform: scale(1.06); }
+
+@media (max-width: 768px) {
+  .cs-gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; }
+}
+
+/* Mood grid (imagery direction) */
+.cs-mood {
+  columns: 3 220px;
+  column-gap: 16px;
+}
+.cs-mood__item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.cs-mood__item img {
+  width: 100%;
+  display: block;
+  transition: transform 0.6s var(--ease);
+}
+.cs-mood__item:hover img { transform: scale(1.05); }
+
+@media (max-width: 768px) {
+  .cs-mood { columns: 2 160px; }
+}
+
+/* Closing */
+.cs-close {
+  padding: 6vh 40px 12vh;
+  text-align: center;
+}
+.cs-close__link {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--grey);
+  letter-spacing: 0.03em;
+}
+.cs-close__link:hover { color: var(--white); }
+
+@media (max-width: 768px) { .cs-close { padding: 6vh 20px 10vh; } }
