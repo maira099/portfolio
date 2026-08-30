@@ -273,10 +273,15 @@ window.scrollTo(0, 0);
       canvas.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
     }
 
+    // Kept modest so the flat halftone plane always reads as an elegant
+    // tilt — past this it would turn edge-on and visually vanish into a line.
+    const MAX_TILT = 26;
+
     function springLoop() {
       if (!dragging) {
         vx *= 0.94; vy *= 0.94;
-        rx += vx; ry += vy;
+        rx = Math.max(-MAX_TILT, Math.min(MAX_TILT, rx + vx));
+        ry = Math.max(-MAX_TILT, Math.min(MAX_TILT, ry + vy));
         rx += (0 - rx) * 0.06;
         ry += (0 - ry) * 0.06;
         applyTransform();
@@ -298,8 +303,8 @@ window.scrollTo(0, 0);
       const dt = Math.max(8, t - lastT);
       const dx = e.clientX - lastX, dy = e.clientY - lastY;
       const addRy = dx * 0.35, addRx = -dy * 0.35;
-      ry += addRy;
-      rx = Math.max(-28, Math.min(28, rx + addRx));
+      ry = Math.max(-MAX_TILT, Math.min(MAX_TILT, ry + addRy));
+      rx = Math.max(-MAX_TILT, Math.min(MAX_TILT, rx + addRx));
       vx = addRx * (16 / dt);
       vy = addRy * (16 / dt);
       lastX = e.clientX; lastY = e.clientY; lastT = t;
