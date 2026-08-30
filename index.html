@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Maira — Design Portfolio</title>
+<meta name="description" content="Maira — Multidisciplinary designer working across brand, product and digital experience design." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@300..600&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<canvas id="trail" aria-hidden="true"></canvas>
+<div class="grain"></div>
+
+<header class="nav">
+  <a href="#hero" class="nav__logo">MAIRA<span>*</span></a>
+
+  <nav class="nav__links">
+    <a href="#work" data-hover>Work</a>
+    <a href="#about" data-hover>About</a>
+    <a href="#contact" data-hover>Contact</a>
+  </nav>
+
+  <div class="nav__status">
+    <span class="dot"></span>
+    Available for work
+  </div>
+
+  <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span>
+  </button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#work" data-hover>Work</a>
+  <a href="#about" data-hover>About</a>
+  <a href="#contact" data-hover>Contact</a>
+</div>
+
+<main>
+
+  <section id="hero" class="hero">
+    <div class="hero__eye-stage" id="heroEyeStage">
+      <canvas id="eye-hero-canvas"></canvas>
+    </div>
+    <div class="drag-hint" id="dragHint"><span>Drag me</span></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">Design Portfolio — 2026</p>
+    </div>
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <span class="hero__scroll-line"></span>
+    </div>
+  </section>
+
+  <section id="intro" class="intro">
+    <div class="intro__inner">
+      <span class="intro__index">01 — Intro</span>
+      <h2 class="intro__tagline">
+        I design brands, products and digital experiences that feel considered, human and a little bit alive.
+      </h2>
+      <p class="intro__text reveal">
+        Hi, I'm Maira — a multidisciplinary designer working across branding, UI/UX and visual storytelling.
+        I care about the details that make an interface feel effortless and a brand feel unmistakable.
+      </p>
+    </div>
+  </section>
+
+  <section id="work" class="work">
+    <div class="work__header">
+      <span class="work__index reveal">02 — Selected Work</span>
+      <h2 class="reveal">Case Studies</h2>
+    </div>
+
+    <div class="work__list">
+
+      <a href="#" class="work__item reveal" data-hover>
+        <div class="work__thumb work__thumb--1"></div>
+        <div class="work__meta">
+          <h3>Aria — Fintech App</h3>
+          <div class="work__tags">
+            <span>Product Design</span>
+            <span>2025</span>
+          </div>
+        </div>
+        <div class="work__arrow">→</div>
+      </a>
+
+      <a href="#" class="work__item reveal" data-hover>
+        <div class="work__thumb work__thumb--2"></div>
+        <div class="work__meta">
+          <h3>Lumen — Brand Identity</h3>
+          <div class="work__tags">
+            <span>Branding</span>
+            <span>2025</span>
+          </div>
+        </div>
+        <div class="work__arrow">→</div>
+      </a>
+
+      <a href="#" class="work__item reveal" data-hover>
+        <div class="work__thumb work__thumb--3"></div>
+        <div class="work__meta">
+          <h3>Nord — E-commerce Site</h3>
+          <div class="work__tags">
+            <span>Web Design</span>
+            <span>2024</span>
+          </div>
+        </div>
+        <div class="work__arrow">→</div>
+      </a>
+
+      <a href="#" class="work__item reveal" data-hover>
+        <div class="work__thumb work__thumb--4"></div>
+        <div class="work__meta">
+          <h3>Studio Vela — Design System</h3>
+          <div class="work__tags">
+            <span>Design Systems</span>
+            <span>2024</span>
+          </div>
+        </div>
+        <div class="work__arrow">→</div>
+      </a>
+
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="about__header">
+      <span class="about__index reveal">03 — About</span>
+      <h2 class="reveal">About Me</h2>
+    </div>
+
+    <div class="about__grid">
+      <div class="about__photo reveal"></div>
+      <div class="about__content">
+        <p class="about__bio reveal">
+          I'm a designer based on the belief that good design is equal parts intuition and craft.
+          Over the past several years I've partnered with startups and studios to shape products
+          and brands from the ground up — sweating the pixels without losing sight of the bigger idea.
+          When I'm not designing, I'm usually collecting type specimens or overthinking grid systems.
+        </p>
+
+        <div class="about__services reveal">
+          <h3>What I do</h3>
+          <ul>
+            <li><span>01</span>Brand Identity</li>
+            <li><span>02</span>UI / UX Design</li>
+            <li><span>03</span>Web Design &amp; Art Direction</li>
+            <li><span>04</span>Design Systems</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact" class="footer">
+  <div class="footer__eye-stage" id="footerEyeStage">
+    <canvas id="eye-footer-canvas"></canvas>
+  </div>
+
+  <div class="footer__kinetic">
+    <h2 class="split-text" data-split>Let's create something great</h2>
+  </div>
+
+  <a href="mailto:mairaa0904@gmail.com" class="footer__email" data-hover data-magnetic>
+    mairaa0904@gmail.com
+  </a>
+
+  <div class="footer__bottom">
+    <div class="footer__social">
+      <a href="#" data-hover>Instagram</a>
+      <a href="#" data-hover>Behance</a>
+      <a href="#" data-hover>LinkedIn</a>
+    </div>
+    <div class="footer__copy">© 2026 Maira. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
