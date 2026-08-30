@@ -2,3 +2,6 @@
 Thumbs.db
 node_modules/
 *.log
+
+# Scratch/intermediate files from asset extraction — not deployable assets
+assets/work/8th-hour/source/
