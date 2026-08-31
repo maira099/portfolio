@@ -16,6 +16,25 @@
 <canvas id="trail" aria-hidden="true"></canvas>
 <div class="grain"></div>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="eye-illustration" viewBox="0 0 600 360">
+      <g stroke="currentColor" fill="none">
+        <path d="M60,180 C150,50 450,50 540,180 C450,260 150,260 60,180 Z" stroke-width="3"/>
+        <g stroke-width="1.2" opacity="0.75">
+          <line x1="342.0" y1="180.0" x2="395.0" y2="180.0"/><line x1="340.9" y1="189.3" x2="392.6" y2="201.1"/><line x1="337.8" y1="198.2" x2="385.6" y2="221.2"/><line x1="332.8" y1="206.2" x2="374.3" y2="239.2"/><line x1="326.2" y1="212.8" x2="359.2" y2="254.3"/><line x1="318.2" y1="217.8" x2="341.2" y2="265.6"/><line x1="309.3" y1="220.9" x2="321.1" y2="272.6"/><line x1="300.0" y1="222.0" x2="300.0" y2="275.0"/><line x1="290.7" y1="220.9" x2="278.9" y2="272.6"/><line x1="281.8" y1="217.8" x2="258.8" y2="265.6"/><line x1="273.8" y1="212.8" x2="240.8" y2="254.3"/><line x1="267.2" y1="206.2" x2="225.7" y2="239.2"/><line x1="262.2" y1="198.2" x2="214.4" y2="221.2"/><line x1="259.1" y1="189.3" x2="207.4" y2="201.1"/><line x1="258.0" y1="180.0" x2="205.0" y2="180.0"/><line x1="259.1" y1="170.7" x2="207.4" y2="158.9"/><line x1="262.2" y1="161.8" x2="214.4" y2="138.8"/><line x1="267.2" y1="153.8" x2="225.7" y2="120.8"/><line x1="273.8" y1="147.2" x2="240.8" y2="105.7"/><line x1="281.8" y1="142.2" x2="258.8" y2="94.4"/><line x1="290.7" y1="139.1" x2="278.9" y2="87.4"/><line x1="300.0" y1="138.0" x2="300.0" y2="85.0"/><line x1="309.3" y1="139.1" x2="321.1" y2="87.4"/><line x1="318.2" y1="142.2" x2="341.2" y2="94.4"/><line x1="326.2" y1="147.2" x2="359.2" y2="105.7"/><line x1="332.8" y1="153.8" x2="374.3" y2="120.8"/><line x1="337.8" y1="161.8" x2="385.6" y2="138.8"/><line x1="340.9" y1="170.7" x2="392.6" y2="158.9"/>
+        </g>
+        <circle cx="300" cy="180" r="95" stroke-width="1.5" opacity="0.6"/>
+        <circle cx="300" cy="180" r="42" stroke-width="2.5"/>
+        <g stroke-width="2.5" stroke-linecap="round">
+          <path d="M100.7,138.8 Q95.7,123.3 77.1,112.9"/><path d="M145.4,113.1 Q143.3,92.2 125.9,78.2"/><path d="M197.1,95.1 Q198.3,69.5 183.5,52.3"/><path d="M253.4,85.0 Q258.1,55.1 246.8,35.1"/><path d="M300.0,82.5 Q308.0,49.5 300.0,27.5"/><path d="M346.6,85.0 Q357.8,55.1 353.2,35.1"/><path d="M402.9,95.1 Q417.2,69.5 416.5,52.3"/><path d="M454.6,113.1 Q471.3,92.2 474.1,78.2"/><path d="M499.3,138.8 Q517.1,123.3 522.9,112.9"/>
+        </g>
+      </g>
+      <circle cx="318" cy="163" r="6" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
 <header class="nav">
   <a href="#hero" class="nav__logo">MAIRA<span>*</span></a>
 
@@ -44,10 +63,17 @@
 <main>
 
   <section id="hero" class="hero">
-    <div class="hero__eye-stage" id="heroEyeStage">
-      <canvas id="eye-hero-canvas"></canvas>
+    <div class="hero__eye-stage">
+      <svg class="hero__eye" viewBox="0 0 600 360" aria-hidden="true">
+        <use href="#eye-illustration"/>
+      </svg>
+      <svg class="hero__drop-fx" viewBox="0 0 600 360" aria-hidden="true">
+        <circle class="ripple ripple--1" cx="300" cy="180" r="14"/>
+        <circle class="ripple ripple--2" cx="300" cy="180" r="14"/>
+        <circle class="ripple ripple--3" cx="300" cy="180" r="14"/>
+        <path class="droplet" d="M300,148 C305,156 316,170 316,180 A16,16 0 1,1 284,180 C284,170 295,156 300,148 Z"/>
+      </svg>
     </div>
-    <div class="drag-hint" id="dragHint"><span>Drag me</span></div>
     <div class="hero__content">
       <p class="hero__eyebrow">Design Portfolio — 2026</p>
     </div>
@@ -78,13 +104,13 @@
 
     <div class="work__list">
 
-      <a href="#" class="work__item reveal" data-hover>
-        <div class="work__thumb work__thumb--1"></div>
+      <a href="work/epicenter-redesign.html" class="work__item reveal" data-hover>
+        <div class="work__thumb work__thumb--epicenter"></div>
         <div class="work__meta">
-          <h3>Aria — Fintech App</h3>
+          <h3>Epicenter — Landing Page Redesign</h3>
           <div class="work__tags">
-            <span>Product Design</span>
-            <span>2025</span>
+            <span>Web Design</span>
+            <span>March 2026 — Ongoing</span>
           </div>
         </div>
         <div class="work__arrow">→</div>
@@ -97,18 +123,6 @@
           <div class="work__tags">
             <span>Concept Branding</span>
             <span>June 2026</span>
-          </div>
-        </div>
-        <div class="work__arrow">→</div>
-      </a>
-
-      <a href="work/epicenter-redesign.html" class="work__item reveal" data-hover>
-        <div class="work__thumb work__thumb--epicenter"></div>
-        <div class="work__meta">
-          <h3>Epicenter — Landing Page Redesign</h3>
-          <div class="work__tags">
-            <span>Web Design</span>
-            <span>March 2026 — Ongoing</span>
           </div>
         </div>
         <div class="work__arrow">→</div>
@@ -139,19 +153,19 @@
       <div class="about__photo reveal"></div>
       <div class="about__content">
         <p class="about__bio reveal">
-          I'm a designer who believes good design is equal parts intuition and craft.
-          Over the past several years I've partnered with startups and studios to shape products
-          and brands from the ground up, sweating the pixels without losing sight of the bigger idea.
-          When I'm not designing, I'm usually collecting type specimens or overthinking grid systems.
+          I'm a designer who likes to design with purpose, with an eye for aesthetics and a strong
+          sense of visual intuition. I'm still technically a beginner, and most of what I know so
+          far comes from working through numerous personal concept projects.
         </p>
 
         <div class="about__services reveal">
           <h3>What I do</h3>
           <ul>
             <li><span>01</span>Brand Identity</li>
-            <li><span>02</span>UI / UX Design</li>
-            <li><span>03</span>Web Design &amp; Art Direction</li>
-            <li><span>04</span>Design Systems</li>
+            <li><span>02</span>Logo Design</li>
+            <li><span>03</span>Web Design</li>
+            <li><span>04</span>UI / UX Design</li>
+            <li><span>05</span>Art Direction</li>
           </ul>
         </div>
       </div>
@@ -162,7 +176,11 @@
 
 <footer id="contact" class="footer">
   <div class="footer__eye-stage" id="footerEyeStage">
-    <canvas id="eye-footer-canvas"></canvas>
+    <svg class="footer__eye" viewBox="0 0 600 360" aria-hidden="true">
+      <use href="#eye-illustration"/>
+    </svg>
+    <div class="footer__lid footer__lid--top"></div>
+    <div class="footer__lid footer__lid--bottom"></div>
   </div>
 
   <div class="footer__kinetic">
@@ -183,6 +201,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=2"></script>
+<script src="js/main.js?v=3"></script>
 </body>
 </html>

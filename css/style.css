@@ -172,44 +172,62 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  perspective: 1200px;
-  cursor: grab;
 }
-.hero__eye-stage.dragging { cursor: grabbing; }
 
-#eye-hero-canvas {
-  width: min(64vw, 900px);
-  height: min(40vw, 560px);
+.hero__eye {
+  width: min(58vw, 820px);
+  height: auto;
+  color: var(--white);
   opacity: 0;
-  transition: opacity 1.4s var(--ease);
-  transform-style: preserve-3d;
-  will-change: transform;
+  animation: heroEyeIn 1.6s var(--ease) 0.3s forwards;
 }
+@keyframes heroEyeIn { to { opacity: 1; } }
 
-.drag-hint {
-  position: fixed;
-  top: 0; left: 0;
-  width: 92px; height: 92px;
-  border-radius: 50%;
-  background: var(--white);
-  color: var(--black);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-family: var(--mono);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+.hero__drop-fx {
+  position: absolute;
+  width: min(58vw, 820px);
+  height: auto;
+  aspect-ratio: 600 / 360;
+  overflow: visible;
   pointer-events: none;
-  z-index: 200;
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.6);
-  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), background 0.3s var(--ease);
 }
-.drag-hint.visible { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-.drag-hint.dragging { background: var(--accent); transform: translate(-50%, -50%) scale(0.88); }
-@media (hover: none), (pointer: coarse) { .drag-hint { display: none; } }
+
+.hero__drop-fx .droplet {
+  fill: var(--white);
+  opacity: 0;
+  transform: translateY(-170px);
+  animation: dropletFall 7s var(--ease) infinite;
+}
+@keyframes dropletFall {
+  0%   { transform: translateY(-170px); opacity: 0; }
+  6%   { transform: translateY(-170px); opacity: 1; }
+  34%  { transform: translateY(0);      opacity: 1; }
+  35%  { transform: translateY(0);      opacity: 0; }
+  100% { transform: translateY(-170px); opacity: 0; }
+}
+
+.hero__drop-fx .ripple {
+  fill: none;
+  stroke: var(--white);
+  stroke-width: 2;
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+}
+.hero__drop-fx .ripple--1 { animation: ripple 7s var(--ease) infinite; }
+.hero__drop-fx .ripple--2 { animation: ripple 7s var(--ease) 0.18s infinite; }
+.hero__drop-fx .ripple--3 { animation: ripple 7s var(--ease) 0.36s infinite; }
+@keyframes ripple {
+  0%, 34%  { transform: scale(0.2); opacity: 0; }
+  36%      { transform: scale(0.4); opacity: 0.85; }
+  70%      { transform: scale(6.5); opacity: 0; }
+  100%     { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__eye { opacity: 1; animation: none; }
+  .hero__drop-fx { display: none; }
+}
 
 .hero__content {
   position: absolute;
@@ -349,10 +367,6 @@ section { position: relative; padding: 0 40px; }
 }
 .work__item:hover .work__thumb { transform: scale(1.08); }
 
-.work__thumb--1 { background: linear-gradient(135deg, #3a3a3a, #111); }
-.work__thumb--2 { background: linear-gradient(135deg, #4a3f3f, #100c0c); }
-.work__thumb--3 { background: linear-gradient(135deg, #33383a, #0d0f10); }
-.work__thumb--4 { background: linear-gradient(135deg, #3f3a2f, #0f0d09); }
 .work__thumb--epicenter {
   background:
     radial-gradient(ellipse 90% 70% at 50% 30%, #cfe1f8 0%, #dfeaf9 40%, #eef3fb 65%, #f7f9fc 100%);
@@ -472,12 +486,24 @@ section { position: relative; padding: 0 40px; }
 }
 
 .footer__eye-stage {
+  position: relative;
   width: min(46vw, 460px);
-  height: min(28vw, 280px);
+  height: min(27.6vw, 276px);
   margin-bottom: 24px;
   cursor: pointer;
+  overflow: hidden;
+  --close: 0;
 }
-#eye-footer-canvas { width: 100%; height: 100%; display: block; }
+.footer__eye { width: 100%; height: 100%; display: block; color: var(--white); }
+.footer__lid {
+  position: absolute;
+  left: -2px; right: -2px;
+  height: 53%;
+  background: var(--black);
+  transition: transform 0.6s var(--ease);
+}
+.footer__lid--top { top: -2px; transform: translateY(calc(-100% + var(--close) * 100%)); }
+.footer__lid--bottom { bottom: -2px; transform: translateY(calc(100% - var(--close) * 100%)); }
 
 @media (max-width: 768px) {
   .footer__eye-stage { width: 80vw; height: 48vw; }
