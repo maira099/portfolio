@@ -142,6 +142,19 @@ body.epicenter {
 }
 .ec-pill:hover { background: var(--ec-white); color: var(--ec-black); border-color: var(--ec-white); }
 
+.ec-pill--solid {
+  background: var(--ec-blue);
+  border-color: var(--ec-blue);
+  color: var(--ec-white);
+  box-shadow: 0 0 24px rgba(77, 116, 255, 0.5);
+}
+.ec-pill--solid:hover {
+  background: var(--ec-blue-bright);
+  border-color: var(--ec-blue-bright);
+  color: var(--ec-black);
+  box-shadow: 0 0 32px rgba(125, 155, 255, 0.7);
+}
+
 .ec-hero__ctas { display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; }
 .ec-hero__secondary { font-family: var(--ec-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--ec-grey); text-decoration: underline; text-underline-offset: 4px; }
 .ec-hero__secondary:hover { color: var(--ec-white); }

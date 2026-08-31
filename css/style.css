@@ -353,6 +353,7 @@ section { position: relative; padding: 0 40px; }
 .work__thumb--2 { background: linear-gradient(135deg, #4a3f3f, #100c0c); }
 .work__thumb--3 { background: linear-gradient(135deg, #33383a, #0d0f10); }
 .work__thumb--4 { background: linear-gradient(135deg, #3f3a2f, #0f0d09); }
+.work__thumb--epicenter { background: radial-gradient(circle at 50% 45%, #7d9bff 0%, #4d74ff 22%, #1c3aa8 46%, #0a1642 68%, #050506 85%); }
 
 .work__meta h3 {
   font-family: var(--display);
