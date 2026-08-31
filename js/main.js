@@ -87,6 +87,79 @@ window.scrollTo(0, 0);
   requestAnimationFrame(draw);
 })();
 
+// ─────────────────────────────────────────────────────────────────────────
+// Hero eye tracking
+//
+// The iris follows the pointer inside its eyelid. The mark sets its own two
+// custom properties rather than being redrawn. Eyes hold still and then cross
+// to a new target quickly, so the rate rises with how far there is left to go.
+// ─────────────────────────────────────────────────────────────────────────
+(function eyeTracking() {
+  // Only marks that actually carry the two balls; the footer's eye is a
+  // different illustration.
+  const eyes = [...document.querySelectorAll('.eye')]
+    .filter(el => el.querySelector('.mark__iris') && el.querySelector('.mark__pupil'));
+  if (!eyes.length) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (matchMedia('(hover: none), (pointer: coarse)').matches) return;
+
+  // Read the geometry off the artwork so it stays the one source of truth for
+  // where the two balls sit and how big they are.
+  const geom = eyes.map(el => {
+    const i = el.querySelector('.mark__iris'), p = el.querySelector('.mark__pupil');
+    return {
+      rim: +i.getAttribute('r') - +p.getAttribute('r') - 3,
+      restX: +p.getAttribute('cx') - +i.getAttribute('cx'),
+      restY: +p.getAttribute('cy') - +i.getAttribute('cy'),
+    };
+  });
+
+  // How far the iris travels, in the mark's own coordinates. Past this it
+  // would ride out over the bands behind it.
+  const REACH_X = 26, REACH_Y = 8;
+  // How far the pupil crosses the iris. The artwork parks it up and to the
+  // right; carried at a fixed offset it stays in that corner however the eye
+  // turns, which is what made the eye look dead.
+  const ROAM_X = 26, ROAM_Y = 14;
+
+  let px = innerWidth / 2, py = innerHeight / 2;
+  const at = eyes.map(() => ({ x: 0, y: 0 }));
+  window.addEventListener('mousemove', e => { px = e.clientX; py = e.clientY; });
+
+  (function frame() {
+    eyes.forEach((el, i) => {
+      const r = el.getBoundingClientRect();
+      if (r.width) {
+        const tx = clamp((px - (r.left + r.width / 2)) / (innerWidth * 0.5), -1, 1) * REACH_X;
+        const ty = clamp((py - (r.top + r.height / 2)) / (innerHeight * 0.5), -1, 1) * REACH_Y;
+        const a = at[i];
+        const rate = Math.hypot(tx - a.x, ty - a.y) > 1.5 ? 0.2 : 0.07;
+        a.x += (tx - a.x) * rate;
+        a.y += (ty - a.y) * rate;
+        el.style.setProperty('--eye-x', a.x.toFixed(2) + 'px');
+        el.style.setProperty('--eye-y', a.y.toFixed(2) + 'px');
+        // Narrowing by the cosine of how far it has turned is what separates
+        // a ball rotating from a disc sliding across the opening.
+        el.style.setProperty('--eye-sx', (1 - 0.11 * Math.abs(a.x) / REACH_X).toFixed(3));
+        el.style.setProperty('--eye-sy', (1 - 0.06 * Math.abs(a.y) / REACH_Y).toFixed(3));
+
+        // Where the pupil sits on the iris, held inside the rim so it can
+        // never wander off the ball it belongs to.
+        const g = geom[i];
+        let ox = g.restX + (a.x / REACH_X) * ROAM_X;
+        let oy = g.restY + (a.y / REACH_Y) * ROAM_Y;
+        const d = Math.hypot(ox, oy);
+        if (d > g.rim) { ox *= g.rim / d; oy *= g.rim / d; }
+        el.style.setProperty('--pupil-x', (ox - g.restX).toFixed(2) + 'px');
+        el.style.setProperty('--pupil-y', (oy - g.restY).toFixed(2) + 'px');
+      }
+    });
+    requestAnimationFrame(frame);
+  })();
+
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+})();
+
 // ─── Footer eye ─── illustrated eye (shared #eye-illustration symbol),
 // eyelid covers slide closed as you scroll toward the end of the page,
 // and peek open again on hover.

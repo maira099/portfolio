@@ -174,59 +174,46 @@ ul { list-style: none; }
   justify-content: center;
 }
 
-.hero__eye {
-  width: min(58vw, 820px);
-  height: auto;
+/* The eye mark, inlined in the hero so its parts stay styleable. */
+.eye {
+  display: block;
   color: var(--white);
+  aspect-ratio: 815 / 447;
+  height: auto;
   opacity: 0;
   animation: heroEyeIn 1.6s var(--ease) 0.3s forwards;
 }
 @keyframes heroEyeIn { to { opacity: 1; } }
+.eye--hero { width: min(74vw, 880px); }
 
-.hero__drop-fx {
-  position: absolute;
-  width: min(58vw, 820px);
-  height: auto;
-  aspect-ratio: 600 / 360;
-  overflow: visible;
-  pointer-events: none;
-}
+.mark__art, .mark__iris { fill: currentColor; }
+.mark__pupil { fill: var(--black); }
 
-.hero__drop-fx .droplet {
-  fill: var(--white);
-  opacity: 0;
-  transform: translateY(-170px);
-  animation: dropletFall 7s var(--ease) infinite;
-}
-@keyframes dropletFall {
-  0%   { transform: translateY(-170px); opacity: 0; }
-  6%   { transform: translateY(-170px); opacity: 1; }
-  34%  { transform: translateY(0);      opacity: 1; }
-  35%  { transform: translateY(0);      opacity: 0; }
-  100% { transform: translateY(-170px); opacity: 0; }
+/* The iris rides inside the eyelid. Custom properties cross into the shadow
+   tree that <use> builds, so the symbol stays one definition while each
+   placement carries its own aim.
+
+   The iris swings and narrows as it turns away, scaled about its own centre
+   with an explicit translate either side so it does not depend on
+   transform-origin resolving against the viewBox. */
+.mark__eye {
+  transform:
+    translate(var(--eye-x, 0px), var(--eye-y, 0px))
+    translate(var(--iris-cx), var(--iris-cy))
+    scale(var(--eye-sx, 1), var(--eye-sy, 1))
+    translate(calc(var(--iris-cx) * -1), calc(var(--iris-cy) * -1));
 }
 
-.hero__drop-fx .ripple {
-  fill: none;
-  stroke: var(--white);
-  stroke-width: 2;
-  transform-box: fill-box;
-  transform-origin: center;
-  opacity: 0;
-}
-.hero__drop-fx .ripple--1 { animation: ripple 7s var(--ease) infinite; }
-.hero__drop-fx .ripple--2 { animation: ripple 7s var(--ease) 0.18s infinite; }
-.hero__drop-fx .ripple--3 { animation: ripple 7s var(--ease) 0.36s infinite; }
-@keyframes ripple {
-  0%, 34%  { transform: scale(0.2); opacity: 0; }
-  36%      { transform: scale(0.4); opacity: 0.85; }
-  70%      { transform: scale(6.5); opacity: 0; }
-  100%     { opacity: 0; }
+/* The pupil crosses the iris it sits on rather than riding along at a fixed
+   offset. Its travel is worked out in script because holding it inside the
+   iris rim is a vector limit, which calc() cannot express. */
+.mark__pupil {
+  transform: translate(var(--pupil-x, 0px), var(--pupil-y, 0px));
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__eye { opacity: 1; animation: none; }
-  .hero__drop-fx { display: none; }
+  .eye { opacity: 1; animation: none; }
+  .mark__eye, .mark__pupil { transform: none; }
 }
 
 .hero__content {
@@ -346,50 +333,80 @@ section { position: relative; padding: 0 40px; }
   font-size: clamp(28px, 3vw, 42px);
 }
 
-.work__item {
+/* Card grid — two columns at an identical pitch, with the right column
+   dropped by a constant offset. That offset is the whole effect. */
+.work__grid {
   display: grid;
-  grid-template-columns: 90px 1fr 160px 40px;
-  align-items: center;
-  gap: 24px;
-  padding: 36px 0;
-  border-bottom: 1px solid #1a1a18;
-  transition: padding-left 0.4s var(--ease);
+  grid-template-columns: 1fr 1fr;
+  column-gap: 24px;
+  row-gap: 96px;
+  padding-top: 64px;
+  padding-bottom: var(--work-stagger, 0px);
 }
-.work__item:hover { padding-left: 16px; }
+.work__card:nth-child(even) { transform: translateY(var(--work-stagger, 0px)); }
+.work__card { display: block; }
 
-.work__thumb {
-  width: 90px; height: 64px;
+.work__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
   border-radius: 6px;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.85;
-  transition: transform 0.5s var(--ease);
+  background: #0d0d0b;
+  margin-bottom: 16px;
 }
-.work__item:hover .work__thumb { transform: scale(1.08); }
+/* The 8TH HOUR lockup carries its own navy ground, so the card matches it
+   and the artwork reads as a full bleed rather than a pasted rectangle. */
+.work__media--navy { background: #053a61; }
 
-.work__thumb--epicenter {
+.work__media img,
+.work__ph {
+  width: 100%; height: 100%;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.6s var(--ease);
+}
+.work__card:hover .work__media img,
+.work__card:hover .work__ph { transform: scale(1.04); }
+
+/* Epicenter has no photography yet, so its thumb is drawn: the light ground
+   the redesign sits on, with the network diagram floated over it. */
+.work__ph--epicenter {
   background:
     radial-gradient(ellipse 90% 70% at 50% 30%, #cfe1f8 0%, #dfeaf9 40%, #eef3fb 65%, #f7f9fc 100%);
   position: relative;
   overflow: hidden;
 }
-.work__thumb--epicenter::before {
+.work__ph--epicenter::before {
   content: '';
   position: absolute;
   inset: 0;
   background-image: url('../assets/work/epicenter-redesign/network.svg');
-  background-size: 180% auto;
-  background-position: 50% 35%;
+  background-size: 90% auto;
+  background-position: 50% 45%;
   background-repeat: no-repeat;
   opacity: 0.5;
   mix-blend-mode: multiply;
 }
 
-.work__meta h3 {
+.work__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+.work__name {
   font-family: var(--display);
   font-weight: 400;
   font-size: clamp(18px, 1.8vw, 24px);
 }
+.work__cta {
+  flex: none;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--grey);
+  transition: color 0.3s var(--ease);
+}
+.work__card:hover .work__cta { color: var(--white); }
+
 .work__tags {
   display: flex;
   gap: 14px;
@@ -398,18 +415,12 @@ section { position: relative; padding: 0 40px; }
   font-size: 12px;
   color: var(--grey);
 }
-.work__arrow {
-  font-size: 20px;
-  color: var(--grey);
-  justify-self: end;
-  transition: transform 0.4s var(--ease), color 0.4s var(--ease);
-}
-.work__item:hover .work__arrow { transform: translateX(6px); color: var(--white); }
+
+@media (min-width: 769px)  { .work__grid { --work-stagger: 180px; } }
+@media (min-width: 1200px) { .work__grid { --work-stagger: 280px; } }
 
 @media (max-width: 768px) {
-  .work__item { grid-template-columns: 60px 1fr 24px; }
-  .work__tags:nth-child(3) {}
-  .work__item > :nth-child(3) { display: none; }
+  .work__grid { grid-template-columns: 1fr; row-gap: 64px; }
 }
 
 /* ─── About ──────────────────────────────────────────────────────── */
