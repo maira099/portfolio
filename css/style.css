@@ -1,22 +1,59 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Design tokens
+   Every font-size comes from the six-level type scale below. Nothing sets
+   a raw px size outside this block.
+   ═══════════════════════════════════════════════════════════════════ */
 :root {
+  /* Colour */
   --black: #000000;
   --bg: #050505;
   --white: #f4f2ee;
   --grey: #8a8a86;
   --grey-dim: #4a4a47;
   --accent: #d89e9e;
-  --mono: 'Fragment Mono', monospace;
-  --display: 'EB Garamond', serif;
-  --body: 'Inter', sans-serif;
-  --ease: cubic-bezier(0.16, 1, 0.3, 1);
-}
+  --rule: #1a1a18;
 
-/* Primary heading font — elegant serif with historical ligatures (ct, st, etc.) */
-h1, h2, h3,
-.intro__tagline, .split-text, .nav__logo {
-  font-family: var(--display);
-  font-variant-ligatures: common-ligatures historical-ligatures;
-  font-feature-settings: "liga" 1, "hlig" 1;
+  /* Families — two, mirroring deeo.studio's grotesk + editorial-serif
+     structure. The grotesk is the workhorse: body, labels, item titles
+     and the largest impact type. The editorial serif is a special-occasion
+     voice, reserved for statements. Instrument Sans and Instrument Serif
+     are one designed pair, so they sit together by intent. */
+  --grotesk: 'Instrument Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --editorial: 'Instrument Serif', 'Times New Roman', serif;
+
+  /* The case-study stylesheets still address the families by their older
+     role names. Pointing those at the pair keeps one type system on the
+     site rather than two. */
+  --display: var(--editorial);
+  --body: var(--grotesk);
+  --mono: var(--grotesk);
+
+  /* Weight */
+  --fw-book: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+
+  /* Tracking — uppercase labels open up, display type tightens. */
+  --track-label: 0.1em;
+  --track-display: -0.01em;
+  --track-hero: -0.02em;
+
+  /* Type scale — six levels, one per job the site actually has.
+     Ratios widen as the sizes grow, so text steps stay tight and display
+     steps stay decisive, and no two levels collide at any width. */
+  --type-micro: 12px;                          /* labels, meta, nav */
+  --type-body: 16px;                           /* prose, links, wordmark */
+  --type-sub: clamp(20px, 1.9vw, 24px);        /* item titles, list rows */
+  --type-heading: clamp(24px, 2.8vw, 36px);    /* section titles */
+  --type-statement: clamp(32px, 4.4vw, 56px);  /* ledes, taglines */
+  --type-display: clamp(48px, 7.5vw, 96px);    /* kinetic line */
+
+  /* Line height */
+  --lh-tight: 1.1;
+  --lh-heading: 1.25;
+  --lh-body: 1.6;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,8 +63,10 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--white);
-  font-family: var(--body);
-  font-weight: 300;
+  font-family: var(--grotesk);
+  font-weight: var(--fw-book);
+  font-size: var(--type-body);
+  line-height: var(--lh-body);
   overflow-x: hidden;
   cursor: none;
 }
@@ -36,6 +75,74 @@ a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
 
 ::selection { background: var(--white); color: var(--black); }
+
+/* ─── Type roles ─────────────────────────────────────────────────── */
+
+/* Structure — the grotesk carries headings and item titles. deeo sets even
+   its 160px impact line in the grotesk, not the serif. */
+h1, h2, h3,
+.mobile-menu {
+  font-family: var(--grotesk);
+  font-weight: var(--fw-book);
+  letter-spacing: var(--track-display);
+  line-height: var(--lh-heading);
+}
+
+/* Statement — the editorial serif, kept for the few reflective moments.
+   Instrument Serif ships regular and italic only, so the weight stays at
+   book; anything heavier would be a synthesised faux bold. */
+.nav__logo,
+.intro__tagline,
+.split-text {
+  font-family: var(--editorial);
+  font-weight: var(--fw-book);
+  letter-spacing: var(--track-display);
+  line-height: var(--lh-heading);
+}
+.intro__tagline,
+.split-text { letter-spacing: var(--track-hero); }
+
+/* Label — grotesk, uppercase, opened up. This is deeo's small-type voice;
+   there is no mono anywhere on their site. */
+.hero__eyebrow,
+.hero__scroll,
+.intro__index,
+.work__index,
+.work__tags,
+.work__cta,
+.about__index,
+.about__services h3,
+.about__services ul li span,
+.nav__links,
+.nav__status,
+.footer__bottom {
+  font-family: var(--grotesk);
+  font-weight: var(--fw-medium);
+  font-size: var(--type-micro);
+  line-height: var(--lh-body);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+.hero__eyebrow,
+.hero__scroll,
+.intro__index,
+.work__index,
+.work__tags,
+.work__cta,
+.about__index,
+.about__services h3,
+.about__services ul li span { color: var(--grey); }
+
+/* Prose */
+.intro__text,
+.about__bio {
+  font-family: var(--grotesk);
+  font-weight: var(--fw-book);
+  font-size: var(--type-body);
+  line-height: var(--lh-body);
+  color: var(--grey);
+  max-width: 640px;
+}
 
 /* ─── Cursor ─────────────────────────────────────────────────────── */
 .cursor {
@@ -52,15 +159,8 @@ ul { list-style: none; }
 }
 .cursor.hover { width: 44px; height: 44px; background: var(--white); }
 @media (hover: none), (pointer: coarse) {
-  .cursor, #trail { display: none; }
+  .cursor { display: none; }
   body { cursor: auto; }
-}
-
-#trail {
-  position: absolute;
-  top: 0; left: 0;
-  z-index: 2;
-  pointer-events: none;
 }
 
 .grain {
@@ -82,18 +182,11 @@ ul { list-style: none; }
   align-items: center;
   justify-content: space-between;
   padding: 28px 40px;
-  font-family: var(--mono);
-  font-size: 13px;
   letter-spacing: 0.02em;
   mix-blend-mode: difference;
 }
 
-.nav__logo {
-  font-family: var(--display);
-  font-weight: 500;
-  font-size: 16px;
-  letter-spacing: 0.02em;
-}
+.nav__logo { font-size: var(--type-body); }
 .nav__logo span { color: var(--accent); }
 
 .nav__links { display: flex; gap: 32px; }
@@ -144,8 +237,7 @@ ul { list-style: none; }
   align-items: center;
   justify-content: center;
   gap: 28px;
-  font-family: var(--display);
-  font-size: 32px;
+  font-size: var(--type-heading);
   transform: translateY(-100%);
   transition: transform 0.5s var(--ease);
 }
@@ -224,9 +316,6 @@ ul { list-style: none; }
   pointer-events: none;
 }
 .hero__eyebrow {
-  font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.05em;
   color: var(--grey);
 }
 
@@ -239,9 +328,6 @@ ul { list-style: none; }
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
   color: var(--grey);
   text-transform: uppercase;
 }
@@ -288,24 +374,15 @@ section { position: relative; padding: 0 40px; }
 }
 .intro__index {
   display: block;
-  font-family: var(--mono);
-  font-size: 12px;
   color: var(--grey);
   margin-bottom: 28px;
-  letter-spacing: 0.04em;
 }
 .intro__tagline {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(28px, 4.2vw, 56px);
+  font-size: var(--type-statement);
   line-height: 1.25;
-  letter-spacing: -0.01em;
   margin-bottom: 40px;
 }
 .intro__text {
-  font-family: var(--body);
-  font-weight: 300;
-  font-size: clamp(16px, 1vw, 19px);
   line-height: 1.7;
   color: var(--grey);
   max-width: 640px;
@@ -323,14 +400,10 @@ section { position: relative; padding: 0 40px; }
   margin-bottom: 8px;
 }
 .work__index {
-  font-family: var(--mono);
-  font-size: 12px;
   color: var(--grey);
 }
 .work__header h2 {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(28px, 3vw, 42px);
+  font-size: var(--type-heading);
 }
 
 /* Card grid — two columns at an identical pitch, with the right column
@@ -394,14 +467,10 @@ section { position: relative; padding: 0 40px; }
   gap: 16px;
 }
 .work__name {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(18px, 1.8vw, 24px);
+  font-size: var(--type-sub);
 }
 .work__cta {
   flex: none;
-  font-family: var(--mono);
-  font-size: 12px;
   color: var(--grey);
   transition: color 0.3s var(--ease);
 }
@@ -411,8 +480,6 @@ section { position: relative; padding: 0 40px; }
   display: flex;
   gap: 14px;
   margin-top: 8px;
-  font-family: var(--mono);
-  font-size: 12px;
   color: var(--grey);
 }
 
@@ -428,15 +495,11 @@ section { position: relative; padding: 0 40px; }
 .about__header { margin-bottom: 60px; }
 .about__index {
   display: block;
-  font-family: var(--mono);
-  font-size: 12px;
   color: var(--grey);
   margin-bottom: 16px;
 }
 .about__header h2 {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(28px, 3vw, 42px);
+  font-size: var(--type-heading);
 }
 
 .about__grid {
@@ -451,7 +514,6 @@ section { position: relative; padding: 0 40px; }
 }
 
 .about__bio {
-  font-size: clamp(16px, 1.1vw, 19px);
   line-height: 1.75;
   color: var(--grey);
   margin-bottom: 48px;
@@ -459,10 +521,6 @@ section { position: relative; padding: 0 40px; }
 }
 
 .about__services h3 {
-  font-family: var(--mono);
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
   color: var(--grey);
   margin-bottom: 20px;
 }
@@ -471,13 +529,10 @@ section { position: relative; padding: 0 40px; }
   gap: 24px;
   padding: 18px 0;
   border-top: 1px solid #1a1a18;
-  font-family: var(--display);
-  font-size: clamp(18px, 2vw, 26px);
+  font-size: var(--type-sub);
 }
 .about__services ul li:last-child { border-bottom: 1px solid #1a1a18; }
 .about__services ul li span {
-  font-family: var(--mono);
-  font-size: 13px;
   color: var(--grey-dim);
 }
 
@@ -522,11 +577,8 @@ section { position: relative; padding: 0 40px; }
 
 .footer__kinetic { margin-bottom: 56px; }
 .split-text {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(36px, 7vw, 90px);
+  font-size: var(--type-display);
   line-height: 1.05;
-  letter-spacing: -0.01em;
 }
 .split-text .char {
   display: inline-block;
@@ -537,8 +589,7 @@ section { position: relative; padding: 0 40px; }
 .split-text.in-view .char { opacity: 1; transform: translateY(0) rotate(0deg); }
 
 .footer__email {
-  font-family: var(--mono);
-  font-size: clamp(16px, 2vw, 22px);
+  font-size: var(--type-sub);
   padding-bottom: 6px;
   border-bottom: 1px solid var(--grey-dim);
   margin-bottom: 80px;
@@ -550,8 +601,6 @@ section { position: relative; padding: 0 40px; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: var(--mono);
-  font-size: 12px;
   color: var(--grey);
   border-top: 1px solid #1a1a18;
   padding-top: 24px;

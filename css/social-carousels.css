@@ -4,19 +4,22 @@
 .sc-project__head { max-width: 640px; margin: 0 auto 48px; text-align: center; }
 .sc-project__tag {
   display: block;
-  font-family: var(--mono);
-  font-size: 12px;
+  font-family: var(--grotesk);
+  font-weight: var(--fw-medium);
+  font-size: var(--type-micro);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
   color: var(--grey);
   letter-spacing: 0.06em;
   margin-bottom: 16px;
 }
 .sc-project__title {
-  font-size: clamp(26px, 3.4vw, 40px);
+  font-size: var(--type-heading);
   margin-bottom: 16px;
 }
 .sc-project__text {
   color: var(--grey);
-  font-size: clamp(15px, 1.05vw, 17px);
+  font-size: var(--type-body);
   line-height: 1.7;
   max-width: 540px;
   margin: 0 auto;
@@ -67,7 +70,7 @@
   border: 1px solid var(--grey-dim);
   background: var(--black);
   color: var(--white);
-  font-size: 16px;
+  font-size: var(--type-body);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -97,8 +100,11 @@
 }
 .carousel__dots button.active { background: var(--white); transform: scale(1.3); }
 .carousel__counter {
-  font-family: var(--mono);
-  font-size: 12px;
+  font-family: var(--grotesk);
+  font-weight: var(--fw-medium);
+  font-size: var(--type-micro);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
   color: var(--grey);
   min-width: 42px;
 }
