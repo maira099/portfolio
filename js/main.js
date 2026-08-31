@@ -29,24 +29,21 @@ window.scrollTo(0, 0);
 // to a new target quickly, so the rate rises with how far there is left to go.
 // ─────────────────────────────────────────────────────────────────────────
 (function eyeTracking() {
-  // Only marks that actually carry the two balls; the footer's eye is a
-  // different illustration.
-  const eyes = [...document.querySelectorAll('.eye')]
-    .filter(el => el.querySelector('.mark__iris') && el.querySelector('.mark__pupil'));
-  if (!eyes.length) return;
+  const eyes = [...document.querySelectorAll('.eye')];
+  const sym = document.getElementById('eyeMark');
+  if (!eyes.length || !sym) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (matchMedia('(hover: none), (pointer: coarse)').matches) return;
 
-  // Read the geometry off the artwork so it stays the one source of truth for
-  // where the two balls sit and how big they are.
-  const geom = eyes.map(el => {
-    const i = el.querySelector('.mark__iris'), p = el.querySelector('.mark__pupil');
-    return {
-      rim: +i.getAttribute('r') - +p.getAttribute('r') - 3,
-      restX: +p.getAttribute('cx') - +i.getAttribute('cx'),
-      restY: +p.getAttribute('cy') - +i.getAttribute('cy'),
-    };
-  });
+  // Every placement references one symbol, so the geometry is read once from
+  // it. The circles themselves live in the shadow tree each <use> builds and
+  // cannot be reached from here — but custom properties set on the host do
+  // cross into it, which is what carries the aim.
+  const irisEl = sym.querySelector('.mark__iris');
+  const pupEl = sym.querySelector('.mark__pupil');
+  const RIM = +irisEl.getAttribute('r') - +pupEl.getAttribute('r') - 3;
+  const REST_X = +pupEl.getAttribute('cx') - +irisEl.getAttribute('cx');
+  const REST_Y = +pupEl.getAttribute('cy') - +irisEl.getAttribute('cy');
 
   // How far the iris travels, in the mark's own coordinates. Past this it
   // would ride out over the bands behind it.
@@ -79,13 +76,12 @@ window.scrollTo(0, 0);
 
         // Where the pupil sits on the iris, held inside the rim so it can
         // never wander off the ball it belongs to.
-        const g = geom[i];
-        let ox = g.restX + (a.x / REACH_X) * ROAM_X;
-        let oy = g.restY + (a.y / REACH_Y) * ROAM_Y;
+        let ox = REST_X + (a.x / REACH_X) * ROAM_X;
+        let oy = REST_Y + (a.y / REACH_Y) * ROAM_Y;
         const d = Math.hypot(ox, oy);
-        if (d > g.rim) { ox *= g.rim / d; oy *= g.rim / d; }
-        el.style.setProperty('--pupil-x', (ox - g.restX).toFixed(2) + 'px');
-        el.style.setProperty('--pupil-y', (oy - g.restY).toFixed(2) + 'px');
+        if (d > RIM) { ox *= RIM / d; oy *= RIM / d; }
+        el.style.setProperty('--pupil-x', (ox - REST_X).toFixed(2) + 'px');
+        el.style.setProperty('--pupil-y', (oy - REST_Y).toFixed(2) + 'px');
       }
     });
     requestAnimationFrame(frame);
