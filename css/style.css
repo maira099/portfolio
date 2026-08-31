@@ -353,7 +353,23 @@ section { position: relative; padding: 0 40px; }
 .work__thumb--2 { background: linear-gradient(135deg, #4a3f3f, #100c0c); }
 .work__thumb--3 { background: linear-gradient(135deg, #33383a, #0d0f10); }
 .work__thumb--4 { background: linear-gradient(135deg, #3f3a2f, #0f0d09); }
-.work__thumb--epicenter { background: radial-gradient(circle at 50% 45%, #7d9bff 0%, #4d74ff 22%, #1c3aa8 46%, #0a1642 68%, #050506 85%); }
+.work__thumb--epicenter {
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 30%, #cfe1f8 0%, #dfeaf9 40%, #eef3fb 65%, #f7f9fc 100%);
+  position: relative;
+  overflow: hidden;
+}
+.work__thumb--epicenter::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/work/epicenter-redesign/network.svg');
+  background-size: 180% auto;
+  background-position: 50% 35%;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+}
 
 .work__meta h3 {
   font-family: var(--display);
