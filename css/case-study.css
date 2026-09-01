@@ -84,9 +84,9 @@
 .cs-lede {
   font-family: var(--editorial);
   font-weight: var(--fw-book);
-  font-size: var(--type-statement);
+  font-size: clamp(18px, 2.2vw, 26px);
   letter-spacing: var(--track-hero);
-  line-height: var(--lh-heading);
+  line-height: 1.5;
   max-width: 900px;
   margin-bottom: 40px;
 }
