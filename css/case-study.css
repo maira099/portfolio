@@ -200,6 +200,18 @@
   .cs-gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; }
 }
 
+/* Single full-width image display (e.g. a hero screenshot) */
+.cs-shot {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #1a1a18;
+  background: #0d0d0b;
+}
+.cs-shot img {
+  display: block;
+  width: 100%;
+}
+
 /* Closing */
 .cs-close {
   padding: 6vh 40px 12vh;

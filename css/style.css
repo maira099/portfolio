@@ -472,35 +472,13 @@ section { position: relative; padding: 0 var(--gutter); }
    and the artwork reads as a full bleed rather than a pasted rectangle. */
 .work__media--navy { background: #053a61; }
 
-.work__media img,
-.work__ph {
+.work__media img {
   width: 100%; height: 100%;
   display: block;
   object-fit: contain;
   transition: transform 0.6s var(--ease);
 }
-.work__card:hover .work__media img,
-.work__card:hover .work__ph { transform: scale(1.04); }
-
-/* Epicenter has no photography yet, so its thumb is drawn: the light ground
-   the redesign sits on, with the network diagram floated over it. */
-.work__ph--epicenter {
-  background:
-    radial-gradient(ellipse 90% 70% at 50% 30%, #cfe1f8 0%, #dfeaf9 40%, #eef3fb 65%, #f7f9fc 100%);
-  position: relative;
-  overflow: hidden;
-}
-.work__ph--epicenter::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('../assets/work/epicenter-redesign/network.svg');
-  background-size: 90% auto;
-  background-position: 50% 45%;
-  background-repeat: no-repeat;
-  opacity: 0.5;
-  mix-blend-mode: multiply;
-}
+.work__card:hover .work__media img { transform: scale(1.04); }
 
 .work__row {
   display: flex;
