@@ -519,17 +519,26 @@ section { position: relative; padding: 0 var(--gutter); }
   font-size: var(--type-heading);
 }
 
+/* Photo top-left, paragraph 1 top-right (matched to its height), then
+   paragraphs 2 and 3 side by side below, filling out the width so the
+   block reads as one balanced 2x2 grid rather than a short photo next
+   to a long, lopsided column of text. */
 .about__grid {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: var(--s-16);
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "photo   bio1"
+    "bio2    bio3"
+    "services services";
+  gap: var(--s-10) var(--s-16);
 }
 .about__photo {
+  grid-area: photo;
   border-radius: 12px;
   background: linear-gradient(160deg, #2c2c2a, #050505 70%);
   overflow: hidden;
   align-self: start; /* hug the photo's own height instead of grid-stretching
-                         to match the (taller) text column */
+                         to match the row */
 }
 .about__photo img {
   width: 100%;
@@ -541,9 +550,20 @@ section { position: relative; padding: 0 var(--gutter); }
 .about__bio {
   line-height: 1.75;
   color: var(--grey);
-  margin-bottom: var(--s-10);
-  max-width: 620px;
 }
+.about__bio--1 {
+  grid-area: bio1;
+  align-self: center;
+  font-family: var(--editorial);
+  font-style: italic;
+  font-weight: var(--fw-book);
+  font-size: var(--type-heading);
+  line-height: 1.35;
+  color: var(--white);
+}
+.about__bio--2 { grid-area: bio2; }
+.about__bio--3 { grid-area: bio3; }
+.about__services { grid-area: services; margin-top: var(--s-6); }
 
 .about__services h3 {
   color: var(--grey);
@@ -562,8 +582,17 @@ section { position: relative; padding: 0 var(--gutter); }
 }
 
 @media (max-width: 768px) {
-  .about__grid { grid-template-columns: 1fr; }
+  .about__grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "photo"
+      "bio1"
+      "bio2"
+      "bio3"
+      "services";
+  }
   .about__photo { max-width: 260px; }
+  .about__bio--1 { align-self: auto; }
 }
 
 /* ─── Footer ─────────────────────────────────────────────────────── */
