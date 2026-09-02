@@ -79,10 +79,10 @@
 }
 
 @media (min-width: 768px) {
-  :root { --gutter: var(--s-8); --section-y: 64px; --work-stagger: 90px; }
+  :root { --gutter: var(--s-8); --section-y: 64px; --work-stagger: 0px; }
 }
 @media (min-width: 1200px) {
-  :root { --gutter: var(--s-10); --section-y: 96px; --work-stagger: 140px; }
+  :root { --gutter: var(--s-10); --section-y: 96px; --work-stagger: 0px; }
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
