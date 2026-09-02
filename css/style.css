@@ -72,17 +72,17 @@
      breakpoints rather than interpolating, so every spacing value the
      site renders is an exact multiple of 4px. */
   --gutter: var(--s-5);
-  --section-y: var(--s-24);
+  --section-y: var(--s-12);
   --work-stagger: 0px;
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (min-width: 768px) {
-  :root { --gutter: var(--s-8); --section-y: 128px; --work-stagger: 180px; }
+  :root { --gutter: var(--s-8); --section-y: 64px; --work-stagger: 90px; }
 }
 @media (min-width: 1200px) {
-  :root { --gutter: var(--s-10); --section-y: 160px; --work-stagger: 280px; }
+  :root { --gutter: var(--s-10); --section-y: 96px; --work-stagger: 140px; }
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -428,7 +428,6 @@ section { position: relative; padding: 0 var(--gutter); }
   line-height: 1.7;
   color: var(--grey);
   max-width: 640px;
-  text-indent: 2.2em;
 }
 
 /* ─── Work ───────────────────────────────────────────────────────── */
