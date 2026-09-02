@@ -546,15 +546,6 @@ section { position: relative; padding: 0 var(--gutter); }
   max-width: 620px;
   margin-bottom: var(--s-10);
 }
-.about__bio--1 {
-  font-family: var(--editorial);
-  font-style: italic;
-  font-weight: var(--fw-book);
-  font-size: var(--type-heading);
-  line-height: 1.35;
-  color: var(--white);
-  margin-bottom: var(--s-12);
-}
 .about__services { margin-top: var(--s-6); }
 
 .about__services h3 {
