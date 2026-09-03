@@ -123,6 +123,7 @@ h1, h2, h3,
 .nav__logo,
 .intro__tagline,
 .work__header h2,
+.work__name,
 .split-text {
   font-family: var(--editorial);
   font-weight: var(--fw-book);
