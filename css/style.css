@@ -518,31 +518,16 @@ section { position: relative; padding: 0 var(--gutter); }
   font-size: var(--type-heading);
 }
 
-/* Photo on the left; all copy — the three paragraphs, then services —
-   stacked in a single column on the right. */
-.about__grid {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: var(--s-16);
-}
-.about__photo {
-  border-radius: 12px;
-  background: linear-gradient(160deg, #2c2c2a, #050505 70%);
-  overflow: hidden;
-  align-self: start; /* hug the photo's own height instead of grid-stretching
-                         to match the (taller) text column */
-}
-.about__photo img {
-  width: 100%;
-  display: block;
-  /* No forced aspect-ratio or object-fit crop here on purpose — the frame
-     follows the photo's own proportions instead of cropping it to fit. */
+/* No photo — just the copy, centered on the page. */
+.about__content {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .about__bio {
   line-height: 1.75;
   color: var(--grey);
-  max-width: 620px;
   margin-bottom: var(--s-10);
 }
 .about__services { margin-top: var(--s-6); }
@@ -561,11 +546,6 @@ section { position: relative; padding: 0 var(--gutter); }
 .about__services ul li:last-child { border-bottom: 1px solid #1a1a18; }
 .about__services ul li span {
   color: var(--grey-dim);
-}
-
-@media (max-width: 768px) {
-  .about__grid { grid-template-columns: 1fr; }
-  .about__photo { max-width: 260px; }
 }
 
 /* ─── Footer ─────────────────────────────────────────────────────── */
