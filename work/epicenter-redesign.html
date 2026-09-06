@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Epicenter — Case Study — Maira</title>
-<meta name="description" content="A landing page hero redesign concept for Epicenter, a local-first, open-source tools ecosystem." />
+<meta name="description" content="A full landing page redesign concept for Epicenter, a local-first, open-source tools ecosystem — designed and built as a working site in Astro, Svelte and Tailwind." />
 <link rel="icon" href="../assets/favicon.ico" sizes="any">
 <link rel="icon" href="../assets/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="../assets/favicon-512.png" type="image/png" sizes="512x512">
@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/style.css?v=14" />
-<link rel="stylesheet" href="../css/case-study.css" />
+<link rel="stylesheet" href="../css/case-study.css?v=2" />
 </head>
 <body>
 
@@ -68,12 +68,12 @@
 
     <p class="cs-eyebrow reveal">Case Study — Landing Page Redesign</p>
     <h1 class="cs-title reveal">EPICENTER</h1>
-    <p class="cs-tagline reveal">A hero for local-first software</p>
+    <p class="cs-tagline reveal">A landing page, designed and built</p>
 
     <div class="cs-spec reveal">
       <div class="cs-spec__item">
         <span>Client</span>
-        <p>Epicenter</p>
+        <p>Epicenter <em style="font-style:normal;color:var(--grey-dim)">(unofficial concept)</em></p>
       </div>
       <div class="cs-spec__item">
         <span>Business Type</span>
@@ -81,12 +81,19 @@
       </div>
       <div class="cs-spec__item">
         <span>Deliverables</span>
-        <p>Landing Page Hero Redesign</p>
+        <p>Full Landing Page — Designed &amp; Built</p>
       </div>
       <div class="cs-spec__item">
         <span>Year</span>
         <p>2026</p>
       </div>
+    </div>
+
+    <div class="cs-actions reveal">
+      <a href="../prototypes/epicenter/" target="_blank" rel="noopener" class="cs-btn" data-hover>
+        Open the live build ↗
+      </a>
+      <a href="#live" class="cs-btn cs-btn--ghost" data-hover>Or browse it here</a>
     </div>
   </section>
 
@@ -94,32 +101,150 @@
   <section class="cs-section">
     <span class="cs-index reveal">01 — Overview</span>
     <p class="cs-lede reveal">
-      Epicenter is a local-first, open-source tools ecosystem: one folder of plain text and SQLite
-      on your machine, shared by every tool instead of scattered across a dozen cloud services. This
-      concept reworks the landing page's hero to lead with that idea before it leads with anything else.
+      Epicenter keeps your notes, transcripts and data in one folder of plain text and SQLite on
+      your own machine. I redesigned its landing page and built the result as a working site.
     </p>
     <div class="cs-keywords reveal">
       <span>Local-First</span>
       <span>Open Source</span>
-      <span>Editorial</span>
-      <span>Systems</span>
+      <span>Design Systems</span>
+      <span>Astro</span>
+      <span>Svelte</span>
+      <span>Tailwind</span>
     </div>
   </section>
 
   <!-- ── 02 The Hero ───────────────────────────────────────────────── -->
   <section class="cs-section">
     <span class="cs-index reveal">02 — The Hero</span>
-    <h2 class="cs-heading reveal">One screen, the whole pitch</h2>
+    <h2 class="cs-heading reveal">The hero</h2>
     <p class="cs-text reveal">
-      A constellation of connected nodes stands in for the product's distributed, local-first
-      architecture, set behind an editorial serif headline for warmth against otherwise technical
-      subject matter. Status badges and a two-tier call to action, join the community or go straight
-      to the code, keep the page honest about what's actually on offer.
+      The headline says what the product is, then stops. There's no screenshot or animation
+      behind it. Under it sit the three claims people will actually check: open source,
+      local-first, plain text.
     </p>
 
     <div class="cs-shot reveal">
-      <img src="../assets/work/epicenter-redesign/hero.jpg" alt="Epicenter landing page hero: a network diagram behind the headline 'Local-First, Open-Source Apps', with Join the Discord and Star on GitHub buttons" loading="lazy">
+      <img src="../assets/work/epicenter-redesign/hero.jpg" alt="Epicenter landing page hero: the headline 'A database for your mind, built on plain text' over a pale blue wash, with Join the Discord and Star on GitHub buttons, above three tiles reading 100% open source, Local-first, and Plain text and SQLite" loading="lazy">
     </div>
+    <p class="cs-cap reveal">
+      The headline is sized so it always breaks into two lines, at any screen width.
+    </p>
+  </section>
+
+  <!-- ── 03 The rail ───────────────────────────────────────────────── -->
+  <section class="cs-section">
+    <span class="cs-index reveal">03 — Structure</span>
+    <h2 class="cs-heading reveal">One grid, top to bottom</h2>
+    <p class="cs-text reveal">
+      Every section sits in the same 1616px container, with a hairline down each side. Nothing
+      crosses those lines, so the edges hold still as you scroll. Cards share their borders
+      rather than each drawing one.
+    </p>
+
+    <div class="cs-shot reveal">
+      <img src="../assets/work/epicenter-redesign/features.jpg" alt="Epicenter features section: the headline 'Built different from the ground up' above four tiled cards with line illustrations, each card sharing hairline borders with its neighbours" loading="lazy">
+    </div>
+    <p class="cs-cap reveal">
+      Four cards, three shared borders.
+    </p>
+  </section>
+
+  <!-- ── 04 Proof ──────────────────────────────────────────────────── -->
+  <section class="cs-section">
+    <span class="cs-index reveal">04 — Proof</span>
+    <h2 class="cs-heading reveal">Real commands, real tools</h2>
+    <p class="cs-text reveal">
+      Most developer pages describe how easy setup is. This one shows the install line and the
+      code that follows it, then names the two tools that ship today and links to their repos.
+    </p>
+
+    <div class="cs-duo reveal">
+      <div class="cs-shot">
+        <img src="../assets/work/epicenter-redesign/quickstart.jpg" alt="Quick start section: a terminal block showing the install command, followed by a syntax-highlighted app.ts file defining a workspace" loading="lazy">
+      </div>
+      <div class="cs-shot">
+        <img src="../assets/work/epicenter-redesign/available.jpg" alt="Available now section: two cards for Whispering and epicenter.sh, each with an app icon, a feature checklist, and Try Now and View on GitHub buttons" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 05 The orbit ──────────────────────────────────────────────── -->
+  <section class="cs-section">
+    <span class="cs-index reveal">05 — The Ecosystem Orbit</span>
+    <h2 class="cs-heading reveal">The ecosystem orbit</h2>
+    <p class="cs-text reveal">
+      "Works with your existing tools" is hard to show in a static block, so it became the only
+      interactive part of the page. VS Code, Git, grep, Obsidian and the AI agents sit on rings
+      that turn when you move the cursor.
+    </p>
+
+    <div class="cs-shot reveal">
+      <img src="../assets/work/epicenter-redesign/ecosystem.jpg" alt="Ecosystem section: labelled cards for VS Code, Git, grep and ripgrep, Obsidian, Claude and OpenCode, and 'Your favourite tool' arranged on concentric elliptical rings" loading="lazy">
+    </div>
+    <p class="cs-cap reveal">
+      Nothing moves on its own. The rings only turn if you turn them.
+    </p>
+  </section>
+
+  <!-- ── 06 Detail ─────────────────────────────────────────────────── -->
+  <section class="cs-section">
+    <span class="cs-index reveal">06 — Detail</span>
+    <h2 class="cs-heading reveal">Alignment</h2>
+    <p class="cs-text reveal">
+      The two cards hold different copy, so at some widths one wrapped a line earlier than the
+      other and knocked every row below it out of line. They now share the same grid rows, so
+      both sides match at any width.
+    </p>
+
+    <div class="cs-shot reveal">
+      <img src="../assets/work/epicenter-redesign/principles.jpg" alt="Core Philosophy section: two cards headed For you and For developers, each with three rows of a blue app-tile icon beside a bold title and a line of grey body copy, all rows aligned across both cards" loading="lazy">
+    </div>
+    <p class="cs-cap reveal">
+      Six icons on one tile shape and one gradient, so they read as a set.
+    </p>
+  </section>
+
+  <!-- ── 07 The close ──────────────────────────────────────────────── -->
+  <section class="cs-section">
+    <span class="cs-index reveal">07 — The Close</span>
+    <h2 class="cs-heading reveal">The ending</h2>
+    <p class="cs-text reveal">
+      The page goes black once, at the end. The mission gets the only full-width section, and
+      the footer sets the wordmark large.
+    </p>
+
+    <div class="cs-shot reveal">
+      <img src="../assets/work/epicenter-redesign/mission.jpg" alt="Mission section on black: the headline 'Software for people who think' beside two paragraphs and two buttons, above a footer with the Epicenter wordmark set very large" loading="lazy">
+    </div>
+  </section>
+
+  <!-- ── 08 The live build ─────────────────────────────────────────── -->
+  <section class="cs-section" id="live">
+    <span class="cs-index reveal">08 — The Live Build</span>
+    <h2 class="cs-heading reveal">The live build</h2>
+    <p class="cs-text reveal">
+      It's a real site: Astro, three Svelte components, Tailwind. About 230KB in total, and most
+      sections ship no JavaScript. It's hosted here and running in the frame below.
+    </p>
+
+    <div class="cs-live reveal">
+      <div class="cs-live__bar">
+        <span class="cs-live__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="cs-live__addr">Epicenter — concept build</span>
+        <a href="../prototypes/epicenter/" target="_blank" rel="noopener" class="cs-live__open" data-hover>Open full size ↗</a>
+      </div>
+      <div class="cs-live__stage">
+        <iframe
+          src="../prototypes/epicenter/"
+          title="Live prototype of the Epicenter landing page redesign"
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+    <p class="cs-cap reveal">
+      Scroll inside the frame. Rendered at 1440px and scaled down to fit.
+    </p>
   </section>
 
   <div class="cs-close reveal">
@@ -155,5 +280,31 @@
 </footer>
 
 <script src="../js/main.js?v=5"></script>
+<script>
+  // The live-build frame renders the prototype at a fixed 1440px viewport and
+  // scales it into whatever width this column has. CSS can't divide by a
+  // length, so the ratio is measured here and handed back as --k; the
+  // stylesheet derives the stage height from it.
+  (function livePrototypeScale() {
+    const stage = document.querySelector('.cs-live__stage');
+    if (!stage) return;
+
+    // Below 640px the stage is display:none, so it measures 0 and there is
+    // nothing to set — the CSS fallback covers it until it has a box again.
+    const fit = () => {
+      const w = stage.getBoundingClientRect().width;
+      if (w) stage.style.setProperty('--k', (w / 1440).toFixed(5));
+    };
+
+    // Measured on first paint, then again whenever the column can change
+    // width: the observer covers the layout resizing under it, the resize
+    // listener covers the frame returning from display:none at the 640px
+    // breakpoint, where it has no box for the observer to report on.
+    fit();
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit, { passive: true });
+    if ('ResizeObserver' in window) new ResizeObserver(fit).observe(stage);
+  })();
+</script>
 </body>
 </html>

@@ -212,6 +212,138 @@
   width: 100%;
 }
 
+/* Two screenshots side by side, for a pair that argues one point together. */
+.cs-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .cs-duo { grid-template-columns: 1fr; }
+}
+
+/* Caption under a shot — the note that says what to look at. */
+.cs-cap {
+  font-family: var(--grotesk);
+  font-size: var(--type-micro);
+  line-height: 1.5;
+  color: var(--grey-dim);
+  margin-top: 14px;
+  max-width: 560px;
+}
+
+/* Actions — the case study's outbound links (live build, source). */
+.cs-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 40px;
+}
+.cs-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--grotesk);
+  font-weight: var(--fw-medium);
+  font-size: var(--type-micro);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  padding: 14px 22px;
+  border-radius: 999px;
+  border: 1px solid var(--white);
+  background: var(--white);
+  color: var(--black);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
+}
+.cs-btn:hover { background: transparent; color: var(--white); }
+
+.cs-btn--ghost {
+  background: transparent;
+  color: var(--grey);
+  border-color: var(--grey-dim);
+}
+.cs-btn--ghost:hover {
+  background: transparent;
+  color: var(--white);
+  border-color: var(--white);
+}
+
+/* ─── Live prototype frame ───────────────────────────────────────────
+   The built page runs inside this, iframed straight out of
+   /prototypes/epicenter/. It is rendered at a fixed 1440px viewport and
+   scaled to whatever width the column has, because the design's desktop
+   layout is the thing being shown — letting the iframe be 900px wide
+   would show the tablet breakpoint instead. --k is set from measured
+   width by the page's own script; the 0.62 fallback keeps the frame
+   sensible if that never runs. */
+.cs-live {
+  border: 1px solid #1a1a18;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0d0d0b;
+}
+.cs-live__bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 13px 18px;
+  border-bottom: 1px solid #1a1a18;
+  background: #0a0a08;
+}
+.cs-live__dots { display: flex; gap: 7px; flex-shrink: 0; }
+.cs-live__dots i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #26261f;
+}
+.cs-live__addr {
+  font-family: var(--grotesk);
+  font-size: var(--type-micro);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--grey-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cs-live__open {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-family: var(--grotesk);
+  font-size: var(--type-micro);
+  letter-spacing: 0.03em;
+  color: var(--grey);
+}
+.cs-live__open:hover { color: var(--white); }
+
+.cs-live__stage {
+  position: relative;
+  width: 100%;
+  height: calc(900px * var(--k, 0.62));
+  overflow: hidden;
+  background: #fff;
+}
+.cs-live__stage iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1440px;
+  height: 900px;
+  border: 0;
+  transform-origin: 0 0;
+  transform: scale(var(--k, 0.62));
+}
+
+/* Below the tablet breakpoint a 1440px page scaled into a phone column is
+   unreadable, so the frame gives way to a link rather than a squint. */
+@media (max-width: 640px) {
+  .cs-live__stage { display: none; }
+  .cs-live__bar { border-bottom: 0; }
+}
+
 /* Closing */
 .cs-close {
   padding: 6vh 40px 12vh;
