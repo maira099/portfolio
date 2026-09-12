@@ -1,0 +1,386 @@
+/* ─── Lunora case study ─────────────────────────────────────────────
+   The site is dark; Lunora is midnight blue and moonlight lilac. Rather
+   than flatten the brand into the site palette, the identity sections sit
+   on their own brand-coloured grounds, the way the deck runs a dark half
+   and a light half. Everything here is scoped under .ln so the brand
+   tokens can't leak into the shared case-study styles. */
+
+.ln {
+  --ln-blue: #11317e;
+  --ln-lilac: #eee4f6;
+  --ln-off: #fcfcff;
+  --ln-linen: #e4ddd3;
+  --ln-brand: 'Questrial', 'Instrument Sans', sans-serif;
+}
+
+/* Small type on this page takes the lilac rather than the site grey, so
+   the case study reads in the brand's own voice. */
+.ln .cs-index,
+.ln .cs-eyebrow { color: #b9a8cc; }
+
+/* Captions here carry argument, not just labels — the phase sequence, why
+   lilac stays rationed — so they take the readable grey. The default dim
+   sits at about 2.3:1 on this ground, which is below AA for body sizes. */
+.ln .cs-cap { color: var(--grey-read); }
+
+/* Full-bleed helper — sections carry the page gutter, so a panel that
+   should run edge to edge has to give it back. */
+.ln-bleed {
+  margin-inline: calc(var(--gutter) * -1);
+  padding-inline: var(--gutter);
+}
+@media (max-width: 768px) {
+  .ln-bleed { margin-inline: -20px; padding-inline: 20px; }
+}
+
+/* ─── Hero wordmark ──────────────────────────────────────────────────
+   The logo is the title. It replaces the text h1 rather than sitting
+   beside one, because the whole argument of this identity is that the
+   wordmark is the mark. */
+.ln-title {
+  display: block;
+  margin-block: 6px 0;
+  line-height: 0;
+}
+.ln-title svg {
+  display: block;
+  width: 100%;
+  max-width: 620px;
+  height: auto;
+  color: var(--ln-lilac);
+}
+
+/* ─── Moodboard ──────────────────────────────────────────────────────
+   Sits in the band's reading column but keeps its own width — the copy
+   column is wider than the board should be, and letting the board stretch
+   to fill it would blow the artwork up past the size it was drawn for. */
+.ln-board {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  margin-top: var(--s-10);
+  max-width: 640px;
+}
+.ln-board img { display: block; width: 100%; }
+
+/* ─── Research stats ─────────────────────────────────────────────────
+   Three findings, each a number first. The number is the finding; the
+   line under it only says what it counted. */
+.ln-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  margin-bottom: var(--s-12);
+}
+.ln-stat {
+  padding: var(--s-8) var(--s-6) var(--s-10);
+  background: #0c0c10;
+  border-top: 1px solid #2a2438;
+}
+.ln-stat b {
+  display: block;
+  font-family: var(--editorial);
+  font-weight: var(--fw-book);
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1;
+  letter-spacing: var(--track-hero);
+  color: var(--ln-lilac);
+  margin-bottom: var(--s-4);
+}
+/* The denominator rides on the same line as the number, a size down and
+   dimmed, so "11" reads as the figure and "/13" as its scale. */
+.ln-stat b i {
+  font-style: normal;
+  font-size: 0.5em;
+  opacity: 0.45;
+}
+/* Direct child only — the denominator above must not pick this up. */
+.ln-stat > span {
+  display: block;
+  font-size: var(--type-prose);
+  line-height: 1.6;
+  color: var(--grey-read);
+}
+@media (max-width: 768px) {
+  .ln-stats { grid-template-columns: 1fr; }
+}
+
+/* ─── Logo panel ─────────────────────────────────────────────────────
+   The wordmark on its own ground at the size it is meant to be read. */
+.ln-panel {
+  background: var(--ln-blue);
+  border-radius: 12px;
+  padding: clamp(48px, 9vw, 120px) var(--s-8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ln-panel svg {
+  display: block;
+  width: min(100%, 680px);
+  height: auto;
+  color: var(--ln-lilac);
+}
+
+/* ─── Moon phases ────────────────────────────────────────────────────
+   U, N and O pulled straight out of the wordmark's own outlines, so the
+   diagram is the logo rather than a redrawing of it. All three share a
+   viewBox height, which is what keeps them optically the same size. */
+.ln-moon {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-6);
+  margin-top: 4px;
+}
+.ln-moon__cell {
+  background: #0c0c10;
+  border-radius: 12px;
+  padding: clamp(32px, 5vw, 56px) var(--s-6) var(--s-6);
+  text-align: center;
+}
+.ln-moon__cell svg {
+  display: block;
+  height: clamp(84px, 11vw, 132px);
+  width: auto;
+  margin: 0 auto clamp(28px, 4vw, 48px);
+  color: var(--ln-lilac);
+}
+.ln-moon__cell em {
+  display: block;
+  font-family: var(--grotesk);
+  font-style: normal;
+  font-weight: var(--fw-medium);
+  font-size: var(--type-micro);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: var(--s-2);
+}
+.ln-moon__cell i {
+  display: block;
+  font-family: var(--grotesk);
+  font-style: normal;
+  font-size: var(--type-note);
+  color: var(--grey-read);
+}
+@media (max-width: 640px) {
+  .ln-moon { grid-template-columns: 1fr; }
+  .ln-moon__cell svg { height: 96px; }
+}
+
+/* ─── Palette ────────────────────────────────────────────────────────
+   Four stacked bands rather than four tiles. A mattress brand's colour
+   is a field you lie in, not a chip. */
+.ln-palette { display: grid; gap: 4px; }
+.ln-swatch {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-5);
+  padding: clamp(28px, 4vw, 44px) var(--s-6);
+  border-radius: 4px;
+}
+.ln-swatch b {
+  font-family: var(--grotesk);
+  font-weight: var(--fw-medium);
+  font-size: var(--type-body);
+}
+.ln-swatch em {
+  font-family: var(--grotesk);
+  font-style: normal;
+  font-size: var(--type-micro);
+  letter-spacing: var(--track-label);
+  opacity: 0.75;
+}
+.ln-swatch i {
+  font-family: var(--editorial);
+  font-style: italic;
+  font-size: var(--type-body);
+  margin-left: auto;
+  opacity: 0.75;
+}
+@media (max-width: 560px) {
+  .ln-swatch i { margin-left: 0; flex-basis: 100%; }
+}
+
+/* Ratio bar — the mix, at the proportion it actually ships at. */
+.ln-ratio {
+  display: flex;
+  height: 44px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: var(--s-6);
+}
+.ln-ratio span { display: block; }
+.ln-ratio__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-6);
+  margin-top: var(--s-4);
+  font-family: var(--grotesk);
+  font-size: var(--type-note);
+  letter-spacing: 0.04em;
+  color: var(--grey-read);
+}
+
+/* ─── Typography ─────────────────────────────────────────────────────
+   Two specimens: the drawn wordmark, then the text face that carries
+   everything else. */
+.ln-spec {
+  background: var(--ln-off);
+  color: #11131a;
+  border-radius: 12px;
+  padding: clamp(32px, 5vw, 64px);
+}
+.ln-spec + .ln-spec { margin-top: 4px; }
+.ln-spec__label {
+  font-family: var(--grotesk);
+  font-weight: var(--fw-medium);
+  font-size: var(--type-micro);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: #6a6f82;
+  margin-bottom: var(--s-8);
+}
+.ln-spec__mark {
+  display: block;
+  width: min(100%, 520px);
+  height: auto;
+  color: var(--ln-blue);
+  margin-bottom: var(--s-8);
+}
+.ln-spec__glyphs {
+  font-family: var(--ln-brand);
+  font-size: clamp(20px, 3.4vw, 40px);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: #11131a;
+  word-break: break-word;
+  margin-bottom: var(--s-8);
+}
+.ln-spec__note {
+  font-size: var(--type-prose);
+  line-height: 1.6;
+  color: #4d5261;
+  max-width: 720px;
+}
+
+/* Hierarchy — the four roles, set the way they ship. One weight, so the
+   only things doing the work are size, spacing and colour. */
+.ln-scale {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: var(--s-6) var(--s-8);
+  align-items: baseline;
+  font-family: var(--ln-brand);
+  margin-bottom: var(--s-10);
+}
+.ln-scale dt {
+  font-family: var(--grotesk);
+  font-weight: var(--fw-medium);
+  font-size: var(--type-micro);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: #9aa0b2;
+}
+.ln-scale dd { color: var(--ln-blue); }
+.ln-scale .is-overline {
+  font-size: var(--type-micro);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+.ln-scale .is-headline {
+  font-size: clamp(24px, 3vw, 38px);
+  line-height: var(--lh-tight);
+}
+.ln-scale .is-body { font-size: var(--type-sub); line-height: var(--lh-heading); }
+.ln-scale .is-label {
+  font-size: var(--type-micro);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: #6a6f82;
+}
+@media (max-width: 640px) {
+  .ln-scale { grid-template-columns: 1fr; gap: var(--s-2) 0; }
+  .ln-scale dt { margin-top: var(--s-5); }
+}
+
+/* ─── Social tiles ───────────────────────────────────────────────────
+   Instagram at its own proportion — 4:5 for the feed posts, 4:5 again
+   for the carousel. Showing them at any other ratio would misreport the
+   work. */
+.ln-tiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-4);
+}
+/* Two tiles, but on the same three-column track as the feed above, so a
+   carousel slide and a feed post are shown at one scale. The empty third
+   column is the point — there are only two slides to show. */
+.ln-duo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-4);
+}
+.ln-tile { margin: 0; }
+.ln-tile img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #0d0d0b;
+}
+.ln-tile figcaption {
+  font-family: var(--grotesk);
+  font-size: var(--type-note);
+  line-height: 1.55;
+  color: var(--grey-read);
+  margin-top: var(--s-3);
+}
+.ln-tile figcaption b {
+  color: var(--white);
+  font-weight: var(--fw-medium);
+}
+@media (max-width: 768px) {
+  .ln-tiles { grid-template-columns: 1fr; gap: var(--s-6); }
+  .ln-duo { grid-template-columns: 1fr; gap: var(--s-6); }
+}
+
+/* ─── Rules list ─────────────────────────────────────────────────────
+   The constraints, as constraints: a list of hard lines, not prose. */
+.ln-rules {
+  list-style: none;
+  border-top: 1px solid var(--rule);
+  max-width: 720px;
+}
+.ln-rules li {
+  padding: var(--s-6) 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: var(--type-prose);
+  line-height: 1.6;
+  color: var(--grey-read);
+}
+.ln-rules li b {
+  display: block;
+  color: var(--white);
+  font-weight: var(--fw-book);
+}
+
+/* ─── Closing statement ──────────────────────────────────────────── */
+.ln-wont {
+  border-top: 1px solid var(--rule);
+  padding-top: var(--s-12);
+}
+.ln-wont p {
+  font-family: var(--editorial);
+  font-size: clamp(20px, 2.6vw, 30px);
+  line-height: 1.45;
+  letter-spacing: var(--track-hero);
+  color: var(--white);
+  max-width: 900px;
+}
+.ln-wont p em {
+  font-style: italic;
+  color: #b9a8cc;
+}

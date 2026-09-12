@@ -84,7 +84,9 @@
 .cs-lede {
   font-family: var(--editorial);
   font-weight: var(--fw-book);
-  font-size: clamp(18px, 2.2vw, 26px);
+  /* Floor sits above --type-prose so the lede still outranks the body copy
+     at the narrowest width, where the clamp would otherwise meet it. */
+  font-size: clamp(21px, 2.2vw, 26px);
   letter-spacing: var(--track-hero);
   line-height: 1.5;
   max-width: 900px;
@@ -96,12 +98,55 @@
   max-width: 760px;
   margin-bottom: 24px;
 }
+/* Case study copy is read, not scanned, so it takes the prose size rather
+   than the UI body size, and the reading grey rather than the label grey.
+   The measure grows with it to hold the line length near 65 characters. */
 .cs-text {
-  font-size: var(--type-body);
-  line-height: var(--lh-body);
-  color: var(--grey);
-  max-width: 640px;
+  font-size: var(--type-prose);
+  line-height: 1.65;
+  color: var(--grey-read);
+  max-width: 720px;
   margin-bottom: 56px;
+}
+
+/* ─── Section band ───────────────────────────────────────────────────
+   Index and heading in a left margin column, prose in a wider right one.
+   At prose size a single left-aligned column leaves half the page empty
+   and still can't run past ~65 characters; splitting the row lets the
+   text start further in and reach the right edge without the line ever
+   growing past a comfortable measure. */
+.cs-band {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(28px, 4.5vw, 72px);
+  align-items: start;
+  margin-bottom: clamp(40px, 5vw, 72px);
+}
+.cs-band__head .cs-index { margin-bottom: var(--s-5); }
+.cs-band__head .cs-heading { margin-bottom: 0; }
+/* Inside the band the column is already the measure, so the paragraph cap
+   would only re-narrow it. */
+.cs-band__body .cs-text { max-width: none; }
+.cs-band__body > :last-child { margin-bottom: 0; }
+
+/* The label rides along beside a tall body — a moodboard, or a long run of
+   copy — instead of stranding the margin column in blank page. */
+@media (min-width: 901px) {
+  .cs-band__head { position: sticky; top: 96px; }
+}
+
+/* Trailing copy that has no heading of its own still lines up with the
+   reading column, so the page keeps a single text edge rather than
+   alternating between the margin and the measure. */
+.cs-band--runon .cs-band__body { grid-column: 2; }
+
+@media (max-width: 900px) {
+  .cs-band {
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+  .cs-band__head .cs-index { margin-bottom: var(--s-4); }
+  .cs-band--runon .cs-band__body { grid-column: 1; }
 }
 
 .cs-keywords {
@@ -227,11 +272,11 @@
 /* Caption under a shot — the note that says what to look at. */
 .cs-cap {
   font-family: var(--grotesk);
-  font-size: var(--type-micro);
-  line-height: 1.5;
+  font-size: var(--type-note);
+  line-height: 1.55;
   color: var(--grey-dim);
   margin-top: 14px;
-  max-width: 560px;
+  max-width: 600px;
 }
 
 /* Actions — the case study's outbound links (live build, source). */

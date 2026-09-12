@@ -10,6 +10,10 @@
   --white: #f4f2ee;
   --grey: #8a8a86;
   --grey-dim: #4a4a47;
+  /* Reading grey — for long-form copy that is actually read rather than
+     scanned. --grey sits near 6:1 on the page ground, which is fine for a
+     label and tiring for a paragraph; this clears 8:1. */
+  --grey-read: #adada8;
   --accent: #d89e9e;
   --rule: #1a1a18;
 
@@ -38,11 +42,16 @@
   --track-display: -0.01em;
   --track-hero: -0.02em;
 
-  /* Type scale — six levels, one per job the site actually has.
+  /* Type scale — eight levels, one per job the site actually has.
      Ratios widen as the sizes grow, so text steps stay tight and display
-     steps stay decisive, and no two levels collide at any width. */
+     steps stay decisive, and no two levels collide at any width.
+     Note and prose sit either side of body: body is the UI size (links,
+     nav, item meta), prose is the size long-form case study copy is read
+     at, and note is the caption size that pairs with it. */
   --type-micro: 12px;                          /* labels, meta, nav */
+  --type-note: clamp(14px, 1.05vw, 16px);      /* captions, notes under art */
   --type-body: 16px;                           /* prose, links, wordmark */
+  --type-prose: clamp(19px, 1.5vw, 22px);      /* case study reading copy */
   --type-sub: clamp(20px, 1.9vw, 24px);        /* item titles, list rows */
   --type-heading: clamp(24px, 2.8vw, 36px);    /* section titles */
   --type-statement: clamp(32px, 4.4vw, 56px);  /* ledes, taglines */
@@ -472,6 +481,10 @@ section { position: relative; padding: 0 var(--gutter); }
 /* The 8TH HOUR lockup carries its own navy ground, so the card matches it
    and the artwork reads as a full bleed rather than a pasted rectangle. */
 .work__media--navy { background: #053a61; }
+/* Lunora's card is a full-bleed night photograph. Matching the card ground
+   to the brand's midnight blue keeps any rounding sliver from reading as a
+   black edge against the artwork. */
+.work__media--night { background: #11317e; }
 
 .work__media img {
   width: 100%; height: 100%;
