@@ -133,6 +133,8 @@ h1, h2, h3,
 .intro__tagline,
 .work__header h2,
 .work__name,
+.gallery__header h2,
+.gallery__name,
 .split-text {
   font-family: var(--editorial);
   font-weight: var(--fw-book);
@@ -150,6 +152,7 @@ h1, h2, h3,
 .work__index,
 .work__tags,
 .work__cta,
+.gallery__index,
 .about__index,
 .about__services h3,
 .about__services ul li span,
@@ -169,6 +172,7 @@ h1, h2, h3,
 .work__index,
 .work__tags,
 .work__cta,
+.gallery__index,
 .about__index,
 .about__services h3,
 .about__services ul li span { color: var(--grey); }
@@ -519,6 +523,57 @@ section { position: relative; padding: 0 var(--gutter); }
 
 @media (max-width: 768px) {
   .work__grid { grid-template-columns: 1fr; row-gap: var(--s-16); padding-bottom: 0; }
+}
+
+/* ─── Gallery ────────────────────────────────────────────────────── */
+.gallery { padding-block: var(--section-y); }
+.gallery__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: var(--s-6);
+  margin-bottom: var(--s-2);
+}
+.gallery__header h2 {
+  font-size: var(--type-heading);
+}
+
+/* Three across, each piece at its own aspect ratio. Painted work fills an
+   arbitrary frame badly — letterboxing a square canvas next to two wide ones
+   would surround the art with more dead ground than art. So the frames are
+   left to the images and the row is hung from the top instead, which puts the
+   ragged edge along the bottom where it reads as intent rather than error. */
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: start;
+  column-gap: var(--s-6);
+  row-gap: var(--s-16);
+  padding-top: var(--s-16);
+}
+.gallery__item { margin: 0; }
+
+.gallery__media {
+  overflow: hidden;
+  border-radius: 6px;
+  background: #0d0d0b;
+  margin-bottom: var(--s-4);
+}
+.gallery__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s var(--ease);
+}
+.gallery__item:hover .gallery__media img { transform: scale(1.04); }
+
+.gallery__name {
+  font-size: var(--type-sub);
+}
+
+@media (max-width: 768px) {
+  .gallery__grid { grid-template-columns: 1fr; row-gap: var(--s-12); }
 }
 
 /* ─── About ──────────────────────────────────────────────────────── */
